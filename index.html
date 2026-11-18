@@ -468,6 +468,15 @@ html.cc :is(input,textarea){cursor:text!important}
 .pc canvas{display:block;width:100%;height:auto}
 .pc .nm{background:#1B1530;color:#fff;text-align:center;font-family:var(--display);font-weight:800;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;padding:7px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dfield{border-radius:var(--r);padding:clamp(20px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:40px 28px;background:radial-gradient(800px 500px at 100% 0%,color-mix(in srgb,var(--orchid) 45%,transparent),transparent 65%),linear-gradient(160deg,var(--plum),#4B1C8C)}
+.dfield.exp{grid-template-columns:minmax(170px,210px) minmax(0,1fr);align-items:center;gap:28px 40px}
+@media (max-width:640px){.dfield.exp{grid-template-columns:1fr}}
+.expd{color:#fff;display:grid;gap:10px;align-content:start}
+.expd .lab{color:rgba(255,255,255,.7);margin:0}.expd .lab::before{color:var(--lilac)}
+.expd h3{font-family:var(--display);font-size:clamp(26px,3vw,36px);font-weight:800;letter-spacing:-.03em;margin:0;line-height:1}
+.expd .eby{opacity:.8;font-size:14px}
+.expd ul{margin:4px 0 0;padding-left:18px;display:grid;gap:7px;font-size:15px;max-width:62ch}
+.expd p{margin:0;opacity:.85;font-size:14px;max-width:62ch}
+.expd .btn{border-color:rgba(255,255,255,.85);color:#fff}
 .dfield.exp{background:radial-gradient(800px 500px at 50% 0%,color-mix(in srgb,var(--lilac) 35%,transparent),transparent 65%),linear-gradient(160deg,var(--orchid),var(--plum))}
 .dfield.ach{background:radial-gradient(800px 500px at 0% 0%,color-mix(in srgb,var(--orchid) 35%,transparent),transparent 65%),linear-gradient(160deg,var(--wine),var(--plum))}
 .dcard{display:grid;gap:7px;text-align:center;color:#fff;align-content:start}
@@ -1249,8 +1258,14 @@ const dcard=c=>`<div class="dcard"><div class="flip" role="button" tabindex="0" 
    ${c.url?`<a class="bv" href="${c.url}" target="_blank" rel="noopener">✓ Verify on issuer's site ↗</a>`:`<span class="bstamp">${c.t==='cert'?'certified':c.t==='exp'?'internship':'★ achievement'}</span>`}
   </div></div></div></div>
   <h3>${c.name}</h3><div class="by">${c.by}${c.when?' · '+c.when:''}</div><span class="hint">tap the card to flip it</span></div>`;
+const expDetail=c=>`<div class="expd"><div class="lab">experience · ${c.when}</div><h3>${c.name}</h3><div class="eby">${c.by} · remote</div>
+  <ul><li><b>Credit-card fraud detection:</b> a classification model with data preprocessing and class-imbalance handling.</li>
+  <li><b>SMS spam detection:</b> an NLP model built on text vectorisation.</li>
+  <li><b>Customer churn prediction:</b> a model that reads usage patterns to forecast which customers will leave.</li></ul>
+  <p>Every model was judged on precision, recall and F1, because the cases that matter are rare.</p>
+  <div class="ctas"><a class="btn" href="https://github.com/likith1231/Codsoft" target="_blank" rel="noopener">Code on GitHub ↗</a></div></div>`;
 function renderDeck(){const exps=CREDS.filter(c=>c.t==='exp'),certs=CREDS.filter(c=>c.t==='cert'),achs=CREDS.filter(c=>c.t==='ach');
-  const group=(key,title,list)=>(credFilter==='all'||credFilter===key)&&list.length?`<div class="credhead"><h2>${title}</h2><span>${list.length}</span></div><div class="dfield ${key} enter">${list.map(dcard).join('')}</div>`:'';
+  const group=(key,title,list)=>(credFilter==='all'||credFilter===key)&&list.length?`<div class="credhead"><h2>${title}</h2><span>${list.length}</span></div><div class="dfield ${key} enter">${list.map(c=>key==='exp'?dcard(c)+expDetail(c):dcard(c)).join('')}</div>`:'';
   $('#deckPage').innerHTML=`<div class="crumbs"><a href="#home">← Home</a></div>
    <div class="phead"><div class="lab">credentials</div><h1>Credentials<span style="color:var(--ac)">.</span></h1><p>My experience, ${certs.length} certifications and ${achs.length} achievements, one card each. Tap a card to flip it. Certifications with a Verify link can be checked on the issuer's own site.</p></div>
    <div class="toolbar"><div class="seg" id="cfilt">${[['all','All'],['exp','Experience'],['cert','Certifications'],['ach','Achievements']].map(([k,l])=>`<button data-f="${k}" aria-pressed="${credFilter===k}">${l}</button>`).join('')}</div></div>
