@@ -1190,7 +1190,7 @@ function route(hh){const h=decodeURIComponent(hh!==undefined?hh:location.hash.sl
   else{cur='home';show('home');
     if(LENS[h]&&h!=='all'){lens=h;apply(true);const t=$('#tailored');t.hidden=false;t.innerHTML=`<span>✦ Shared view: this portfolio is filtered for <b>${LENS[h][0]}</b> roles.</span><button id="showall">show everything</button>`;$('#showall').onclick=()=>{t.hidden=true;setLens('all')}}
     else $('#tailored').hidden=true;
-    if(prev!=='home'){scrollTo(0,0);stagger($('#homeGrid'))}}
+    if(prev!=='home'){scrollTo(0,0);stagger($('#homeGrid'));setTimeout(runPipe,700)}}
   drawCmpBar();$('#progress').style.width='0'}
 addEventListener('hashchange',()=>route());
 
