@@ -460,8 +460,8 @@ html.cc :is(input,textarea){cursor:text!important}
 .fan .pc{position:absolute;left:50%;bottom:-56px;width:136px;transform-origin:50% 130%;transform:translateX(-50%) rotate(calc(var(--k)*9deg)) translateX(calc(var(--k)*14px));transition:transform .6s var(--ease)}
 .decktile:hover .fan .pc{transform:translateX(-50%) rotate(calc(var(--k)*15deg)) translateX(calc(var(--k)*30px)) translateY(-18px)}
 @media (max-width:760px){.fan{height:210px}}
-.pc{background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45)}
-.pc .fr{border:2px solid var(--ac);border-radius:7px;overflow:hidden;background:var(--soft)}
+.pc{display:block;background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45)}
+.pc .fr{width:100%;border:2px solid var(--ac);border-radius:7px;overflow:hidden;background:var(--soft)}
 .pc .num{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--ac);border-bottom:2px solid var(--ac);padding:3px 0;background:#fff;font-weight:600}
 .pc.ach .fr{border-color:var(--wine)}.pc.ach .num{color:var(--wine);border-color:var(--wine)}
 .pc canvas{display:block;width:100%;height:auto}
