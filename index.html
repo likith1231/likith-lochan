@@ -480,13 +480,13 @@ html.cc :is(input,textarea){cursor:text!important}
 .back.ach .bi{border-color:var(--wine);background:radial-gradient(color-mix(in srgb,var(--wine) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,#F8E9F0)}
 .back .bk{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:600}
 .back.ach .bk,.back.ach .bl{color:var(--wine)}
-.back h4{font-family:var(--display);font-size:15px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em}
+.back h4{font-family:var(--display);font-size:14px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em}
 .back .bby{font-size:11.5px;color:#6A6380;margin-top:-3px}
-.back p{font-size:11.5px;line-height:1.4;margin:0;color:#3A3450}
+.back p{font-size:11px;line-height:1.4;margin:0;color:#3A3450;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .back .bcov{display:grid;gap:4px}
 .back .bl{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);font-weight:600}
 .back .bcov div{display:flex;flex-wrap:wrap;gap:3px}
-.back .bcov span:not(.bl){font-size:10.5px;padding:2px 6px;border-radius:5px;background:#fff;border:1px solid color-mix(in srgb,var(--ac) 25%,#E5DEFA)}
+.back .bcov span:not(.bl){font-size:10px;padding:1px 5px;border-radius:5px;background:#fff;border:1px solid color-mix(in srgb,var(--ac) 25%,#E5DEFA)}
 .back .bv,.back .bstamp{margin-top:auto;align-self:flex-start;font-size:11px;font-weight:600;border-radius:7px;padding:5px 9px;text-decoration:none}
 .back .bv{background:linear-gradient(135deg,var(--ac),var(--plum));color:#fff}
 .back .bstamp{font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--wine);border:1.5px dashed var(--wine)}
@@ -1241,7 +1241,7 @@ const dcard=c=>`<div class="dcard"><div class="flip" role="button" tabindex="0" 
    <div class="bk">${c.t==='cert'?'certification':'achievement'}${c.when?' · '+c.when:''}</div>
    <h4>${c.name}</h4><div class="bby">${c.by}</div>
    <p>${c.what}</p>
-   <div class="bcov"><span class="bl">${c.t==='cert'?'covers':'highlights'}</span><div>${(c.cov||[]).map(x=>`<span>${x}</span>`).join('')}</div></div>
+   <div class="bcov"><span class="bl">${c.t==='cert'?'covers':'highlights'}</span><div>${(c.cov||[]).slice(0,3).map(x=>`<span>${x}</span>`).join('')}</div></div>
    ${c.url?`<a class="bv" href="${c.url}" target="_blank" rel="noopener">✓ Verify on issuer's site ↗</a>`:`<span class="bstamp">${c.t==='cert'?'certified':'★ achievement'}</span>`}
   </div></div></div></div>
   <h3>${c.name}</h3><div class="by">${c.by}${c.when?' · '+c.when:''}</div><span class="hint">tap the card to flip it</span></div>`;
