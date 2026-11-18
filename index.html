@@ -463,10 +463,12 @@ html.cc :is(input,textarea){cursor:text!important}
 .pc{display:block;background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45)}
 .pc .fr{width:100%;border:2px solid var(--ac);border-radius:7px;overflow:hidden;background:var(--soft)}
 .pc .num{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--ac);border-bottom:2px solid var(--ac);padding:3px 0;background:#fff;font-weight:600}
+.pc.exp .fr{border-color:var(--orchid)}.pc.exp .num{color:var(--orchid);border-color:var(--orchid)}
 .pc.ach .fr{border-color:var(--wine)}.pc.ach .num{color:var(--wine);border-color:var(--wine)}
 .pc canvas{display:block;width:100%;height:auto}
 .pc .nm{background:#1B1530;color:#fff;text-align:center;font-family:var(--display);font-weight:800;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;padding:7px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dfield{border-radius:var(--r);padding:clamp(20px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:40px 28px;background:radial-gradient(800px 500px at 100% 0%,color-mix(in srgb,var(--orchid) 45%,transparent),transparent 65%),linear-gradient(160deg,var(--plum),#4B1C8C)}
+.dfield.exp{background:radial-gradient(800px 500px at 50% 0%,color-mix(in srgb,var(--lilac) 35%,transparent),transparent 65%),linear-gradient(160deg,var(--orchid),var(--plum))}
 .dfield.ach{background:radial-gradient(800px 500px at 0% 0%,color-mix(in srgb,var(--orchid) 35%,transparent),transparent 65%),linear-gradient(160deg,var(--wine),var(--plum))}
 .dcard{display:grid;gap:7px;text-align:center;color:#fff;align-content:start}
 .flip{perspective:1100px;display:block;width:100%;cursor:pointer;outline-offset:4px}
@@ -475,14 +477,15 @@ html.cc :is(input,textarea){cursor:text!important}
 .flip.on .in{transform:rotateY(180deg)}
 .flip .pc,.flip .back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip .back{position:absolute;inset:0;transform:rotateY(180deg);background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45);text-align:left}
-.back .bi{height:100%;border:2px solid var(--ac);border-radius:7px;padding:12px 11px;display:flex;flex-direction:column;gap:6px;color:#1B1530;overflow:hidden;
+.back .bi{height:100%;border:2px solid var(--ac);border-radius:7px;padding:10px 9px;display:flex;flex-direction:column;gap:5px;color:#1B1530;overflow:hidden;
   background:radial-gradient(color-mix(in srgb,var(--ac) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,var(--soft))}
 .back.ach .bi{border-color:var(--wine);background:radial-gradient(color-mix(in srgb,var(--wine) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,#F8E9F0)}
 .back .bk{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:600}
 .back.ach .bk,.back.ach .bl{color:var(--wine)}
-.back h4{font-family:var(--display);font-size:14px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em}
+.back.exp .bi{border-color:var(--orchid)}.back.exp .bk,.back.exp .bl{color:var(--orchid)}.back.exp .bstamp{color:var(--orchid);border-color:var(--orchid)}
+.back h4{font-family:var(--display);font-size:13px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em}
 .back .bby{font-size:11.5px;color:#6A6380;margin-top:-3px}
-.back p{font-size:11px;line-height:1.4;margin:0;color:#3A3450;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.back p{font-size:10.5px;line-height:1.38;margin:0;color:#3A3450;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .back .bcov{display:grid;gap:4px}
 .back .bl{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);font-weight:600}
 .back .bcov div{display:flex;flex-wrap:wrap;gap:3px}
@@ -530,7 +533,7 @@ html.cc :is(input,textarea){cursor:text!important}
   <nav aria-label="Main">
     <a class="logo" href="#home"><i></i>likith lochan</a>
     <div class="routes">
-      <a href="#home" data-nav="home">Home</a><a href="#work" data-nav="work">Work</a><a href="#credentials" data-nav="deck">Certifications</a><button id="navAbout">About</button><button id="navResume">Resume</button><button id="navContact">Contact</button>
+      <a href="#home" data-nav="home">Home</a><a href="#work" data-nav="work">Work</a><a href="#credentials" data-nav="deck">Credentials</a><button id="navAbout">About</button><button id="navResume">Resume</button><button id="navContact">Contact</button>
     </div>
     <div class="navr">
       <button class="kbd" id="tourBtn">▶ 30-sec tour</button>
@@ -649,10 +652,10 @@ html.cc :is(input,textarea){cursor:text!important}
 
       <a class="t c12 decktile" href="#credentials" id="s-deck">
         <div>
-          <div class="lab">certifications &amp; achievements</div>
-          <h3>Certifications &amp; achievements</h3>
-          <p>Verified certifications from AWS and Oracle, plus my internship, hackathon and leadership roles.</p>
-          <div class="cnt"><div><b id="nCert">5</b><span>certifications</span></div><div><b id="nAch">6</b><span>achievements</span></div></div>
+          <div class="lab">credentials</div>
+          <h3>Experience, certifications &amp; achievements</h3>
+          <p>My ML internship, verified certifications from AWS and Oracle, and leadership roles.</p>
+          <div class="cnt"><div><b id="nExp">1</b><span>experience</span></div><div><b id="nCert">5</b><span>certifications</span></div><div><b id="nAch">4</b><span>achievements</span></div></div>
           <span class="go">See all <span class="ar">→</span></span>
         </div>
         <div class="fan" id="fan" aria-hidden="true"></div>
@@ -1173,7 +1176,7 @@ function tourGo(i){$$('.spot').forEach(s=>s.classList.remove('spot'));if(i<0||i>
 $('#tourBtn').onclick=()=>tourGo(0);
 
 /* ================= PALETTE ================= */
-const items=[...P.map(p=>[p.name,"case study",()=>go(p.id)]),["All work","page",()=>go('work')],["Compare projects","page",()=>go('work')],["Certifications & achievements","page",()=>go('credentials')],["Home","page",()=>go('home')],
+const items=[...P.map(p=>[p.name,"case study",()=>go(p.id)]),["All work","page",()=>go('work')],["Compare projects","page",()=>go('work')],["Credentials: experience, certifications & achievements","page",()=>go('credentials')],["Home","page",()=>go('home')],
  ["Likith's Resume","resume",openResume],["Copy email","action",copyEmail],["Start 30-second tour","action",()=>tourGo(0)],
  ...Object.keys(LENS).map(k=>["View as "+(k==='all'?'everything':LENS[k][0]),"role",()=>{if(cur!=='home')go('home');setLens(k)}]),
  ["Copy link to this view","share",()=>$('#shareLens').click()],["Toggle dark mode","action",toggleTheme],["Keyboard shortcuts","help",openKeys],["Replay intro","action",()=>playIntro(true)]];
@@ -1215,7 +1218,7 @@ medal:["","...xx......xx...","....xa....ax....",".....xa..ax.....","......xaax..
 star:["",".......xx.......",".......aa.......","......xaax......","......xaax......","xxxxxxaaaaxxxxxx",".xaaaaaaaaaaaax.","..xaaaassaaaax..","...xaaaaaaaax...","...xaaaaaaaax...","..xaaaaxxaaaax..","..xaaax..xaaax..",".xaax......xaax.",".xxx........xxx.","",""],
 heart:["","","...xxx....xxx...","..xaaax..xaaax..",".xaaaaaxxaaaaax.",".xaasaaaaaaaaax.",".xaaaaaaaaaaaax.","..xaaaaaaaaaax..","...xaaaaaaaax...","....xaaaaaax....",".....xaaaax.....","......xaax......",".......xx.......","","",""]};
 function drawPixel(cv){const sp=SPR[cv.dataset.spr];if(!sp)return;const ctx=cv.getContext('2d');const C=10,COLS=16,ROWS=17;cv.width=COLS*C;cv.height=ROWS*C;
-  const ach=cv.dataset.t==='ach',AC=ach?(cssv('--wine')||'#6E1A43'):(cssv('--ac')||'#6B3FF2'),MK=cssv('--mk')||'#DDD2FF',SOFT=cssv('--soft')||'#EEE8FF',INK='#1B1530';
+  const T=cv.dataset.t,AC=T==='ach'?(cssv('--wine')||'#6E1A43'):T==='exp'?(cssv('--orchid')||'#A64CD6'):(cssv('--ac')||'#6B3FF2'),MK=cssv('--mk')||'#DDD2FF',SOFT=cssv('--soft')||'#EEE8FF',INK='#1B1530';
   ctx.fillStyle=SOFT;ctx.fillRect(0,0,cv.width,cv.height);const sd=cv.dataset.spr.length;
   for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){const w=Math.sin(x*.7+sd)+Math.cos(y*.55-sd*.3);ctx.fillStyle=w>.4?MK:'#fff';ctx.beginPath();ctx.arc(x*C+C/2,y*C+C/2,w>.4?3:1.6,0,6.283);ctx.fill()}
   const rows=sp.map(r=>(r+'................').slice(0,16)),top=Math.floor((ROWS-rows.length)/2);
@@ -1226,31 +1229,32 @@ const CREDS=[
  {t:'cert',s:'robot',short:'Oracle AI',cov:['AI & ML basics','Generative AI & LLMs','AI agents','OCI AI services'],name:'Oracle AI Foundations',by:'Oracle',when:'Jul 2026',what:'Oracle certification on AI and agentic AI foundations.',url:'https://catalog-education.oracle.com/pls/certview/sharebadge?id=1E2117DD9FC2FB3A7EE64696BA6313651EC01E7594244C181FFF695C4210163F'},
  {t:'cert',s:'net',short:'Networks',cov:['OSI & TCP/IP models','IP addressing','Routing & switching'],name:'Computer Networks',by:'Simplilearn',when:'Oct 2025',what:'Networking fundamentals behind cloud and DevOps work.',url:'https://tinyurl.com/bdex8see'},
  {t:'cert',s:'spark',short:'IBM Gen AI',cov:['How LLMs work','Prompting','Use cases & limits'],name:'Introduction to Generative AI',by:'IBM',when:'Mar 2024',what:'Generative AI fundamentals: how large language models work and where to use them.',url:''},
- {t:'ach',s:'chart',short:'ML Intern',cov:['Fraud detection','SMS spam (NLP)','Churn prediction','Precision & recall'],name:'Machine Learning Intern',by:'CodSoft (virtual)',when:'2026',what:'Built three predictive models in Python: credit-card fraud, SMS spam and customer churn.'},
+ {t:'exp',s:'chart',short:'ML Intern',cov:['Fraud detection','SMS spam (NLP)','Churn prediction','Precision & recall'],name:'Machine Learning Intern',by:'CodSoft (virtual)',when:'2026',what:'Built three predictive models end to end in Python, judged on precision and recall rather than accuracy alone.'},
  {t:'ach',s:'flag',short:'RYLA 2024',cov:['Leadership training','Teamwork','Community service'],name:'RYLA 2024',by:'Rotary Youth Leadership Awards',when:'2024',what:"Selected for Rotary's youth leadership programme."},
  {t:'ach',s:'medal',short:'Appreciation',cov:['Hiring event support','Community'],name:'Certificate of Appreciation',by:"Namma JobAthon '24",when:'2024',what:'Recognised for contributing to the Namma JobAthon hiring event.'},
  {t:'ach',s:'star',short:'Coordinator Lead',cov:['Event planning','Team coordination'],name:'Coordinator Lead',by:'MEGHAHERTZ Fest',when:'',what:'Led coordination for the college fest.'},
  {t:'ach',s:'heart',short:'Rotaract',cov:['Community service','Volunteering'],name:'Rotaract Club of APSCE',by:'Member',when:'',what:'Community service with the college Rotaract Club.'}];
-const pcHTML=(c,k)=>`<div class="pc ${c.t}"${k!==undefined?` style="--k:${k}"`:''}><div class="fr"><div class="num">${c.t==='cert'?'certification':'achievement'}</div><canvas data-spr="${c.s}" data-t="${c.t}" width="160" height="170" aria-hidden="true"></canvas><div class="nm">${c.short}</div></div></div>`;
-$('#nCert').textContent=CREDS.filter(c=>c.t==='cert').length;$('#nAch').textContent=CREDS.filter(c=>c.t==='ach').length;
+const KIND={cert:'certification',exp:'experience',ach:'achievement'};
+const pcHTML=(c,k)=>`<div class="pc ${c.t}"${k!==undefined?` style="--k:${k}"`:''}><div class="fr"><div class="num">${KIND[c.t]}</div><canvas data-spr="${c.s}" data-t="${c.t}" width="160" height="170" aria-hidden="true"></canvas><div class="nm">${c.short}</div></div></div>`;
+$('#nExp').textContent=CREDS.filter(c=>c.t==='exp').length;$('#nCert').textContent=CREDS.filter(c=>c.t==='cert').length;$('#nAch').textContent=CREDS.filter(c=>c.t==='ach').length;
 $('#fan').innerHTML=[0,1,2,4,5].map((i,k)=>pcHTML(CREDS[i],k-2)).join('');
 $$('#fan canvas[data-spr]').forEach(drawPixel);
 let credFilter='all';
 const dcard=c=>`<div class="dcard"><div class="flip" role="button" tabindex="0" aria-pressed="false" aria-label="Flip the ${c.name} card">
   <div class="in">${pcHTML(c)}<div class="back ${c.t}"><div class="bi">
-   <div class="bk">${c.t==='cert'?'certification':'achievement'}${c.when?' · '+c.when:''}</div>
-   <h4>${c.name}</h4><div class="bby">${c.by}</div>
+   <div class="bk">${KIND[c.t]}${c.when?' · '+c.when:''}</div>
+   <h4>${c.name}</h4>
    <p>${c.what}</p>
-   <div class="bcov"><span class="bl">${c.t==='cert'?'covers':'highlights'}</span><div>${(c.cov||[]).slice(0,3).map(x=>`<span>${x}</span>`).join('')}</div></div>
-   ${c.url?`<a class="bv" href="${c.url}" target="_blank" rel="noopener">✓ Verify on issuer's site ↗</a>`:`<span class="bstamp">${c.t==='cert'?'certified':'★ achievement'}</span>`}
+   <div class="bcov"><span class="bl">${c.t==='cert'?'covers':c.t==='exp'?'built':'highlights'}</span><div>${(c.cov||[]).slice(0,c.url?2:3).map(x=>`<span>${x}</span>`).join('')}</div></div>
+   ${c.url?`<a class="bv" href="${c.url}" target="_blank" rel="noopener">✓ Verify on issuer's site ↗</a>`:`<span class="bstamp">${c.t==='cert'?'certified':c.t==='exp'?'internship':'★ achievement'}</span>`}
   </div></div></div></div>
   <h3>${c.name}</h3><div class="by">${c.by}${c.when?' · '+c.when:''}</div><span class="hint">tap the card to flip it</span></div>`;
-function renderDeck(){const certs=CREDS.filter(c=>c.t==='cert'),achs=CREDS.filter(c=>c.t==='ach');
+function renderDeck(){const exps=CREDS.filter(c=>c.t==='exp'),certs=CREDS.filter(c=>c.t==='cert'),achs=CREDS.filter(c=>c.t==='ach');
+  const group=(key,title,list)=>(credFilter==='all'||credFilter===key)&&list.length?`<div class="credhead"><h2>${title}</h2><span>${list.length}</span></div><div class="dfield ${key} enter">${list.map(dcard).join('')}</div>`:'';
   $('#deckPage').innerHTML=`<div class="crumbs"><a href="#home">← Home</a></div>
-   <div class="phead"><div class="lab">credentials</div><h1>Certifications &amp; achievements<span style="color:var(--ac)">.</span></h1><p>${certs.length} certifications and ${achs.length} achievements, one card each. Certifications with a Verify link can be checked on the issuer's own site.</p></div>
-   <div class="toolbar"><div class="seg" id="cfilt"><button data-f="all" aria-pressed="${credFilter==='all'}">All</button><button data-f="cert" aria-pressed="${credFilter==='cert'}">Certifications</button><button data-f="ach" aria-pressed="${credFilter==='ach'}">Achievements</button></div></div>
-   ${credFilter!=='ach'?`<div class="credhead"><h2>Certifications</h2><span>${certs.length}</span></div><div class="dfield enter">${certs.map(dcard).join('')}</div>`:''}
-   ${credFilter!=='cert'?`<div class="credhead"><h2>Achievements</h2><span>${achs.length}</span></div><div class="dfield ach enter">${achs.map(dcard).join('')}</div>`:''}`;
+   <div class="phead"><div class="lab">credentials</div><h1>Credentials<span style="color:var(--ac)">.</span></h1><p>My experience, ${certs.length} certifications and ${achs.length} achievements, one card each. Tap a card to flip it. Certifications with a Verify link can be checked on the issuer's own site.</p></div>
+   <div class="toolbar"><div class="seg" id="cfilt">${[['all','All'],['exp','Experience'],['cert','Certifications'],['ach','Achievements']].map(([k,l])=>`<button data-f="${k}" aria-pressed="${credFilter===k}">${l}</button>`).join('')}</div></div>
+   ${group('exp','Experience',exps)}${group('cert','Certifications',certs)}${group('ach','Achievements',achs)}`;
   $$('#deckPage canvas[data-spr]').forEach(drawPixel);
   $$('#deckPage .flip').forEach(f=>{const t=()=>{f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))};
     f.addEventListener('click',e=>{if(e.target.closest('a'))return;t()});f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
