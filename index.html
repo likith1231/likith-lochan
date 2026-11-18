@@ -508,6 +508,21 @@ html.cc :is(input,textarea){cursor:text!important}
 .dcard .by{font-size:13px;opacity:.8}
 .dcard p{font-size:13.5px;margin:2px 0 0;opacity:.9;border-top:1px solid rgba(255,255,255,.22);padding-top:9px}
 .dcard .vf{font-size:12.5px;font-weight:600;color:#fff;text-underline-offset:3px}
+.edustrip{display:flex;gap:10px 28px;flex-wrap:wrap;align-items:center;padding:13px 18px;font-size:14px}
+.edustrip i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ac);margin-right:8px}
+.edustrip b{font-weight:600}
+.edustrip a{margin-left:auto;font-size:13px;font-weight:500;color:var(--ac);text-decoration:none}
+.morehead{display:flex;align-items:baseline;gap:12px;padding:10px 4px 0}
+.morehead h3{font-family:var(--display);font-size:20px;font-weight:800;letter-spacing:-.02em;margin:0}
+.morehead span{font-size:13px;color:var(--muted)}
+.proj.mini h3{font-size:18px}
+.proj.mini p{font-size:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:980px){.c3{grid-column:span 6}}@media (max-width:560px){.c3{grid-column:span 12}}
+.limits{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch;font-size:15.5px}
+.verifyl{display:grid;gap:8px;max-width:72ch}
+.verifyl a{display:flex;justify-content:space-between;gap:12px;align-items:center;text-decoration:none;background:var(--tile);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;transition:border-color .2s,transform .2s var(--ease)}
+.verifyl a:hover{border-color:var(--ac);transform:translateX(3px)}
+.verifyl b{color:var(--ac)}
 .credhead{display:flex;align-items:baseline;gap:12px;margin:26px 4px 12px}
 .credhead h2{font-family:var(--display);font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.025em;margin:0}
 .credhead span{font-family:var(--mono);font-size:12px;color:var(--muted)}
@@ -593,10 +608,12 @@ html.cc :is(input,textarea){cursor:text!important}
 
       <section class="c12 stats" id="s-stats" aria-label="At a glance">
         <div class="t stat"><b data-count="8">8</b><span><strong>Projects shipped</strong>end to end, solo</span></div>
-        <div class="t stat"><b data-count="7">7</b><span><strong>Live in production</strong>checked from your browser</span></div>
+        <div class="t stat"><b data-count="7">7</b><span><strong>Deployed · live demos</strong>checked from your browser</span></div>
         <div class="t stat"><b data-count="4">4</b><span><strong>Cloud platforms</strong>AWS · Oracle · Vercel · Render</span></div>
         <div class="t stat"><b data-count="5">5</b><span><strong>Certifications</strong>AWS ×2 · Oracle · IBM · Simplilearn</span></div>
       </section>
+
+      <div class="t c12 edustrip"><span><i>experience</i><b>Machine Learning Intern</b> · CodSoft (virtual) · 2026</span><span><i>education</i><b>B.E. Computer Science</b> · APS College of Engineering, Bengaluru · 2023–27</span><a href="#credentials">All credentials →</a></div>
 
       <div class="c12 shead" id="s-workhead">
         <div><h2>Selected work</h2><p>Click any project for the full case study.</p></div>
@@ -950,8 +967,28 @@ const P=[
  result:"Three working models, documented in the CodSoft repository.",
  lesson:["Accuracy can lie","On rare events, the metric you choose decides whether the model is useful."],imgs:[]}
 ];
-// The ML internship is listed under achievements, not as a project
-P.splice(P.findIndex(p=>p.id==='mlintern'),1);P.find(p=>p.id==='pm').span='c6';P.find(p=>p.id==='authencheck').span='c6';
+// The ML internship is listed under experience, not as a project
+P.splice(P.findIndex(p=>p.id==='mlintern'),1);
+// Featured four first; the rest sit under "More projects"
+{const order=['ghostops','resilient','orbit','billguard','sahayak','greencart','pm','authencheck'];P.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+ P.forEach(p=>{if(['ghostops','resilient','orbit','billguard'].includes(p.id))p.span='c6';else{p.span='c3';p.more=true}});}
+// Honest labels and verification
+{const g=P.find(p=>p.id==='ghostops'),r=P.find(p=>p.id==='resilient');
+ g.stack=g.stack.map(x=>x==='Vault'?'Vault (dev mode)':x);g.how=g.how.map(h=>h.replace('Secrets live in Vault.','Secrets live in Vault (running in dev mode for now).'));
+ r.diagram.nodes.find(n=>n.id==='tf').s='EKS: ran once';r.diagram.nodes.find(n=>n.id==='tf').d='The same stack defined as code for AWS EKS, validated on LocalStack first. It ran once on real EKS in a time-boxed session (about $0.03) and was destroyed; it is not running now.';
+ r.result=r.result.replace('Terraform defines the same stack on AWS EKS.','Terraform defines the same stack for AWS EKS; it ran there once in a time-boxed session (about $0.03) and was destroyed, so EKS is Terraform-defined, not running.');
+ r.repoLabel='Source code (repo: Aethermed)';}
+const EXTRA={
+ ghostops:{lim:['Runs on one Oracle Cloud Always Free VM shared with other projects: no high availability.','HashiCorp Vault runs in dev mode over HTTP; production would need TLS and auto-unseal.','The public demo runs in mock mode; the real Claude pipeline runs privately.','Two incidents have been fixed with real pull requests so far. That is a small sample, not a measured fix rate.'],
+  verify:[['PR #3: memory-leak fix opened by GhostOps','https://github.com/likith1231/ghostops/pull/3'],['PR #4: failing CI test fixed by GhostOps','https://github.com/likith1231/ghostops/pull/4'],['Test suite (530 pytest tests) and known limitations in the README','https://github.com/likith1231/ghostops#readme']]},
+ resilient:{lim:['The live cluster is a single-node k3s on one free-tier VM, so autoscaling adds pods, not machines.','The load-test numbers come from single runs, not repeated runs with confidence intervals.','AWS EKS is Terraform-defined: it ran once in a time-boxed session and was destroyed. It is not running now.'],
+  verify:[['Load-test results and the connection-pool tuning table','https://github.com/likith1231/Aethermed#readme'],['k6 script and Kubernetes manifests (k8s/)','https://github.com/likith1231/Aethermed/tree/main/k8s']]},
+ orbit:{lim:['The backend shares one free-tier VM with GhostOps: no high availability.','A proof is only as strong as the project\'s own tests; without tests it falls back to running or compiling.'],
+  verify:[['Source, architecture and test workflow','https://github.com/likith1231/Orbit-IDE#readme']]},
+ billguard:{lim:['Tuned for Indian health insurance (INR, IRDAI rules); other markets need new rules.','AI findings are marked as AI and should be checked against the documents; rule findings are deterministic.'],
+  verify:[['Checks, architecture and demo mode in the README','https://github.com/likith1231/billguard#readme']]}};
+P.forEach(p=>Object.assign(p,EXTRA[p.id]||{}));
+P.find(p=>p.id==='pm').span='c6';P.find(p=>p.id==='authencheck').span='c6';
 const LENS={all:["DevOps · Full-stack · AI/ML","I design, build and run <mark>production software</mark>, from the API to the cluster it runs on."],
  devops:["DevOps & Cloud","I run <mark>Kubernetes platforms</mark> with GitOps, autoscaling and observability, and load-test them before users do."],
  fullstack:["Full-stack Development","I build <mark>complete products</mark>: typed APIs, real databases, payments, and the interface on top."],
@@ -966,14 +1003,14 @@ const S=[["languages",["Python","TypeScript","JavaScript","Java","SQL"],{devops:
 /* ================= HOME ================= */
 // name letters
 (()=>{const h=$('#hname');h.innerHTML=[..."Likith Lochan"].map((c,i)=>c===' '?' ':`<span class="ch" style="--c:${i}">${c}</span>`).join('')+`<span class="ch dotc" style="--c:13">.</span>`})();
-function cardHTML(p){return `<a class="t ${p.span} proj" href="#${p.id}" data-id="${p.id}">
+function cardHTML(p){if(p.more)return `<a class="t ${p.span} proj mini" href="#${p.id}" data-id="${p.id}"><div class="lab">work/${p.id} ${p.live?'<span class="live"><span class="dot"></span>live</span>':''}</div><h3>${p.name}</h3><p>${p.blurb}</p><span class="open">Case study <span class="ar">→</span></span></a>`;return `<a class="t ${p.span} proj" href="#${p.id}" data-id="${p.id}">
   <div class="lab">work/${p.id} ${p.live?'<span class="live"><span class="dot"></span>live</span>':'<span class="r note">'+p.type.toLowerCase()+'</span>'}</div>
   <h3>${p.name}</h3><p>${p.blurb}</p>
   ${p.id==='ghostops'?`<div class="pipe" id="pipe"><span class="node">alert</span><span class="edge"></span><span class="node">diagnose</span><span class="edge"></span><span class="node">patch</span><span class="edge"></span><span class="node">sandbox + policy</span><span class="edge"></span><span class="node">pull request</span></div><div class="pipenote" id="pipenote">watch an incident move through the pipeline</div>`:''}
   <div class="proof">${p.proof}</div>
   <div class="tags">${p.stack.slice(0,p.id==='ghostops'?8:5).map(s=>`<span data-s="${s}">${s}</span>`).join('')}</div>
   <span class="open">Read case study <span class="ar">→</span></span></a>`}
-$('#cards').innerHTML=P.map(cardHTML).join('');
+$('#cards').innerHTML=P.filter(p=>!p.more).map(cardHTML).join('')+'<div class="c12 morehead"><h3>More projects</h3><span>smaller builds, each with its own case study</span></div>'+P.filter(p=>p.more).map(cardHTML).join('');
 $('#skills').innerHTML=S.map(([h,items])=>`<div><h4>${h}</h4><div class="chips">${items.map(i=>`<button data-skill="${i}">${i}</button>`).join('')}</div></div>`).join('');
 let lens='all',skill=null;
 $('#skills').onclick=e=>{const b=e.target.closest('[data-skill]');if(!b)return;skill=skill===b.dataset.skill?null:b.dataset.skill;apply(true);if(skill)$('#s-workhead').scrollIntoView({behavior:reduce?'auto':'smooth'})};
@@ -1067,7 +1104,7 @@ function renderCompare(){const ps=picked.map(id=>P.find(p=>p.id===id));
    ${row('role',p=>p.role)}
    ${row('focus',p=>p.r.map(k=>LENS[k][0]).join(' · '))}
    ${row('stack',p=>`<div class="tags">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div>`)}
-   ${row('status',p=>p.live?'<span class="live" style="margin:0"><span class="dot"></span>live in production</span>':'source on GitHub')}
+   ${row('status',p=>p.live?'<span class="live" style="margin:0"><span class="dot"></span>deployed · live demo</span>':'source on GitHub')}
    ${row('',p=>`<a class="btn ac" href="#${p.id}">Case study <span class="ar">→</span></a>`)}
    </div></div>`;stagger($('#comparePage .enter'))}
 
@@ -1102,9 +1139,9 @@ function renderCase(p){const i=P.indexOf(p),prev=P[(i-1+P.length)%P.length],next
    <div class="chiprow">${p.r.map(k=>`<span>${LENS[k][0]}</span>`).join('')}</div>
    <h1>${p.name}<span style="color:var(--ac)">.</span></h1>
    <p class="tag">${p.tagline}</p>
-   <div class="ctas">${p.live?`<a class="btn ac" href="${p.live}" target="_blank" rel="noopener">Live demo ↗</a>`:''}<a class="btn" href="${p.repo}" target="_blank" rel="noopener">Source code ↗</a>
+   <div class="ctas">${p.live?`<a class="btn ac" href="${p.live}" target="_blank" rel="noopener">Live demo ↗</a>`:''}<a class="btn" href="${p.repo}" target="_blank" rel="noopener">${p.repoLabel||'Source code'} ↗</a>
      <div class="seg" id="mode" style="margin-left:auto"><button data-m="tech" aria-pressed="${caseMode==='tech'}">Technical</button><button data-m="plain" aria-pressed="${caseMode==='plain'}">Plain English</button></div></div>
-   <div class="facts"><div><small>role</small><b>${p.role}</b></div><div><small>when</small><b>${p.time}</b></div><div><small>type</small><b>${p.type}</b></div><div><small>status</small><b>${p.live?'<span class="dot"></span>Live in production':'Source on GitHub'}</b></div></div>
+   <div class="facts"><div><small>role</small><b>${p.role}</b></div><div><small>when</small><b>${p.time}</b></div><div><small>type</small><b>${p.type}</b></div><div><small>status</small><b>${p.live?'<span class="dot"></span>Deployed · live demo':'Source on GitHub'}</b></div></div>
    <div class="mrow">${p.metrics.map(m=>`<div class="t"><b>${m[0]}</b><span>${m[1]}</span></div>`).join('')}</div>
   </div>
   ${p.imgs.length?`<div class="gal enter">${p.imgs.map(([s,c])=>`<figure><img src="${s}" alt="${esc(c)}" loading="lazy"><figcaption>${esc(c)}</figcaption></figure>`).join('')}</div>`:''}
@@ -1117,8 +1154,10 @@ function renderCase(p){const i=P.indexOf(p),prev=P[(i-1+P.length)%P.length],next
     <section class="sec tech" id="c-how"><h2><small>03</small>How it works</h2><ol class="steps">${p.how.map(h=>`<li><span>${h}</span></li>`).join('')}</ol></section>
     <section class="sec tech" id="c-log"><h2><small>04</small>What broke, and what I changed</h2><div class="logl">${p.log.map(l=>`<div><span>${l}</span></div>`).join('')}</div></section>
     <section class="sec" id="c-result"><h2><small>05</small>Outcome</h2><p>${p.result}</p></section>
+    ${p.lim?`<section class="sec" id="c-lim"><h2><small>06</small>Known limitations</h2><ul class="limits">${p.lim.map(l=>`<li>${l}</li>`).join('')}</ul></section>`:''}
+    ${p.verify?`<section class="sec" id="c-verify"><h2><small>07</small>How to verify</h2><div class="verifyl">${p.verify.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener"><span>${t}</span><b>↗</b></a>`).join('')}</div></section>`:''}
     <section class="sec" id="c-lesson"><div class="lesson"><small>what I took away</small><h3>${p.lesson[0]}</h3><p>${p.lesson[1]}</p></div></section>
-    <section class="sec" id="c-stack"><h2><small>06</small>Tech stack</h2><div class="tags">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div></section>
+    <section class="sec" id="c-stack"><h2><small>08</small>Tech stack</h2><div class="tags">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div></section>
     <a class="t nextp" href="#${next.id}"><div><small>next case study</small><h3>${next.name}</h3><span style="color:var(--muted)">${next.tagline}</span></div><span class="ar">→</span></a>
    </div></div></article>`;
   wireDiagram(p.diagram);buildToc();
