@@ -469,8 +469,29 @@ html.cc :is(input,textarea){cursor:text!important}
 .dfield{border-radius:var(--r);padding:clamp(20px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:40px 28px;background:radial-gradient(800px 500px at 100% 0%,color-mix(in srgb,var(--orchid) 45%,transparent),transparent 65%),linear-gradient(160deg,var(--plum),#4B1C8C)}
 .dfield.ach{background:radial-gradient(800px 500px at 0% 0%,color-mix(in srgb,var(--orchid) 35%,transparent),transparent 65%),linear-gradient(160deg,var(--wine),var(--plum))}
 .dcard{display:grid;gap:7px;text-align:center;color:#fff;align-content:start}
-.dcard .pcw{transition:transform .45s var(--ease)}
-.dcard:hover .pcw{transform:translateY(-8px) rotate(-1.5deg)}
+.flip{perspective:1100px;display:block;width:100%;cursor:pointer;outline-offset:4px}
+.flip .in{position:relative;transition:transform .75s var(--ease);transform-style:preserve-3d}
+.flip:not(.on):hover .in{transform:translateY(-8px) rotate(-1.5deg)}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .pc,.flip .back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip .back{position:absolute;inset:0;transform:rotateY(180deg);background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45);text-align:left}
+.back .bi{height:100%;border:2px solid var(--ac);border-radius:7px;padding:12px 11px;display:flex;flex-direction:column;gap:6px;color:#1B1530;overflow:hidden;
+  background:radial-gradient(color-mix(in srgb,var(--ac) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,var(--soft))}
+.back.ach .bi{border-color:var(--wine);background:radial-gradient(color-mix(in srgb,var(--wine) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,#F8E9F0)}
+.back .bk{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:600}
+.back.ach .bk,.back.ach .bl{color:var(--wine)}
+.back h4{font-family:var(--display);font-size:15px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em}
+.back .bby{font-size:11.5px;color:#6A6380;margin-top:-3px}
+.back p{font-size:11.5px;line-height:1.4;margin:0;color:#3A3450}
+.back .bcov{display:grid;gap:4px}
+.back .bl{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);font-weight:600}
+.back .bcov div{display:flex;flex-wrap:wrap;gap:3px}
+.back .bcov span:not(.bl){font-size:10.5px;padding:2px 6px;border-radius:5px;background:#fff;border:1px solid color-mix(in srgb,var(--ac) 25%,#E5DEFA)}
+.back .bv,.back .bstamp{margin-top:auto;align-self:flex-start;font-size:11px;font-weight:600;border-radius:7px;padding:5px 9px;text-decoration:none}
+.back .bv{background:linear-gradient(135deg,var(--ac),var(--plum));color:#fff}
+.back .bstamp{font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--wine);border:1.5px dashed var(--wine)}
+.back.cert .bstamp{color:var(--ac);border-color:var(--ac)}
+.dcard .hint{font-family:var(--mono);font-size:10.5px;opacity:.6}
 .dcard h3{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.01em;margin:8px 0 0;line-height:1.2}
 .dcard .by{font-size:13px;opacity:.8}
 .dcard p{font-size:13.5px;margin:2px 0 0;opacity:.9;border-top:1px solid rgba(255,255,255,.22);padding-top:9px}
@@ -610,7 +631,7 @@ html.cc :is(input,textarea){cursor:text!important}
           <li><time>2027</time><span><b>B.E. graduation</b> · hiring now</span></li>
           <li><time>2026</time><span><b>GhostOps, Orbit, K8s stack</b> live</span></li>
           <li><time>2026</time><span><b>ML Intern</b> · CodSoft</span></li>
-          <li><time>2024</time><span><b>RYLA</b> · NASA Space Challenge</span></li>
+          <li><time>2024</time><span><b>RYLA</b> · Rotary leadership</span></li>
           <li><time>2023</time><span><b>B.E. CSE</b> · APS College of Engg.</span></li>
         </ol>
       </section>
@@ -1200,23 +1221,30 @@ function drawPixel(cv){const sp=SPR[cv.dataset.spr];if(!sp)return;const ctx=cv.g
   const rows=sp.map(r=>(r+'................').slice(0,16)),top=Math.floor((ROWS-rows.length)/2);
   rows.forEach((r,y)=>[...r].forEach((ch,x)=>{if(ch==='.')return;ctx.fillStyle=ch==='x'?INK:ch==='a'?AC:MK;ctx.beginPath();ctx.arc(x*C+C/2,(y+top)*C+C/2,ch==='s'?4:4.4,0,6.283);ctx.fill()}))}
 const CREDS=[
- {t:'cert',s:'chip',short:'AWS AI',name:'AWS Certified AI Practitioner',by:'Amazon Web Services',when:'Sep 2026',what:'Proctored AWS exam on AI, machine learning and generative AI services.',url:'https://www.credly.com/badges/15423736-cd54-47de-8db1-9734be88cee1'},
- {t:'cert',s:'cloud',short:'AWS Cloud',name:'AWS Certified Cloud Practitioner',by:'Amazon Web Services',when:'Oct 2026',what:'Proctored AWS exam on cloud concepts, security, pricing and core services.',url:'https://www.credly.com/badges/6e478082-fc9c-4f8a-83bf-5ed3f07633ae'},
- {t:'cert',s:'robot',short:'Oracle AI',name:'Oracle AI Foundations',by:'Oracle',when:'Jul 2026',what:'Oracle certification on AI and agentic AI foundations.',url:'https://catalog-education.oracle.com/pls/certview/sharebadge?id=1E2117DD9FC2FB3A7EE64696BA6313651EC01E7594244C181FFF695C4210163F'},
- {t:'cert',s:'net',short:'Networks',name:'Computer Networks',by:'Simplilearn',when:'Oct 2025',what:'Networking fundamentals behind cloud and DevOps work.',url:'https://tinyurl.com/bdex8see'},
- {t:'cert',s:'spark',short:'IBM Gen AI',name:'Introduction to Generative AI',by:'IBM',when:'Mar 2024',what:'Generative AI fundamentals: how large language models work and where to use them.',url:'https://tinyurl.com/39jnjbm'},
- {t:'ach',s:'chart',short:'ML Intern',name:'Machine Learning Intern',by:'CodSoft (virtual)',when:'2026',what:'Built three predictive models in Python: credit-card fraud, SMS spam and customer churn.'},
- {t:'ach',s:'rocket',short:'NASA Hackathon',name:'NASA Space Challenge Hackathon',by:'Dayananda Sagar',when:'',what:'Took part in the NASA Space Challenge hackathon.'},
- {t:'ach',s:'flag',short:'RYLA 2024',name:'RYLA 2024',by:'Rotary Youth Leadership Awards',when:'2024',what:"Selected for Rotary's youth leadership programme."},
- {t:'ach',s:'medal',short:'Appreciation',name:'Certificate of Appreciation',by:"Namma JobAthon '24",when:'2024',what:'Recognised for contributing to the Namma JobAthon hiring event.'},
- {t:'ach',s:'star',short:'Coordinator Lead',name:'Coordinator Lead',by:'MEGHAHERTZ Fest',when:'',what:'Led coordination for the college fest.'},
- {t:'ach',s:'heart',short:'Rotaract',name:'Rotaract Club of APSCE',by:'Member',when:'',what:'Community service with the college Rotaract Club.'}];
+ {t:'cert',s:'chip',short:'AWS AI',cov:['AI & ML fundamentals','Generative AI','Foundation models','Responsible AI','Security & governance'],name:'AWS Certified AI Practitioner',by:'Amazon Web Services',when:'Sep 2026',what:'Proctored AWS exam on AI, machine learning and generative AI services.',url:'https://www.credly.com/badges/15423736-cd54-47de-8db1-9734be88cee1'},
+ {t:'cert',s:'cloud',short:'AWS Cloud',cov:['Cloud concepts','Security & compliance','Core AWS services','Billing & pricing'],name:'AWS Certified Cloud Practitioner',by:'Amazon Web Services',when:'Oct 2026',what:'Proctored AWS exam on cloud concepts, security, pricing and core services.',url:'https://www.credly.com/badges/6e478082-fc9c-4f8a-83bf-5ed3f07633ae'},
+ {t:'cert',s:'robot',short:'Oracle AI',cov:['AI & ML basics','Generative AI & LLMs','AI agents','OCI AI services'],name:'Oracle AI Foundations',by:'Oracle',when:'Jul 2026',what:'Oracle certification on AI and agentic AI foundations.',url:'https://catalog-education.oracle.com/pls/certview/sharebadge?id=1E2117DD9FC2FB3A7EE64696BA6313651EC01E7594244C181FFF695C4210163F'},
+ {t:'cert',s:'net',short:'Networks',cov:['OSI & TCP/IP models','IP addressing','Routing & switching'],name:'Computer Networks',by:'Simplilearn',when:'Oct 2025',what:'Networking fundamentals behind cloud and DevOps work.',url:'https://tinyurl.com/bdex8see'},
+ {t:'cert',s:'spark',short:'IBM Gen AI',cov:['How LLMs work','Prompting','Use cases & limits'],name:'Introduction to Generative AI',by:'IBM',when:'Mar 2024',what:'Generative AI fundamentals: how large language models work and where to use them.',url:''},
+ {t:'ach',s:'chart',short:'ML Intern',cov:['Fraud detection','SMS spam (NLP)','Churn prediction','Precision & recall'],name:'Machine Learning Intern',by:'CodSoft (virtual)',when:'2026',what:'Built three predictive models in Python: credit-card fraud, SMS spam and customer churn.'},
+ {t:'ach',s:'flag',short:'RYLA 2024',cov:['Leadership training','Teamwork','Community service'],name:'RYLA 2024',by:'Rotary Youth Leadership Awards',when:'2024',what:"Selected for Rotary's youth leadership programme."},
+ {t:'ach',s:'medal',short:'Appreciation',cov:['Hiring event support','Community'],name:'Certificate of Appreciation',by:"Namma JobAthon '24",when:'2024',what:'Recognised for contributing to the Namma JobAthon hiring event.'},
+ {t:'ach',s:'star',short:'Coordinator Lead',cov:['Event planning','Team coordination'],name:'Coordinator Lead',by:'MEGHAHERTZ Fest',when:'',what:'Led coordination for the college fest.'},
+ {t:'ach',s:'heart',short:'Rotaract',cov:['Community service','Volunteering'],name:'Rotaract Club of APSCE',by:'Member',when:'',what:'Community service with the college Rotaract Club.'}];
 const pcHTML=(c,k)=>`<div class="pc ${c.t}"${k!==undefined?` style="--k:${k}"`:''}><div class="fr"><div class="num">${c.t==='cert'?'certification':'achievement'}</div><canvas data-spr="${c.s}" data-t="${c.t}" width="160" height="170" aria-hidden="true"></canvas><div class="nm">${c.short}</div></div></div>`;
 $('#nCert').textContent=CREDS.filter(c=>c.t==='cert').length;$('#nAch').textContent=CREDS.filter(c=>c.t==='ach').length;
-$('#fan').innerHTML=[0,1,2,5,6].map((i,k)=>pcHTML(CREDS[i],k-2)).join('');
+$('#fan').innerHTML=[0,1,2,4,5].map((i,k)=>pcHTML(CREDS[i],k-2)).join('');
 $$('#fan canvas[data-spr]').forEach(drawPixel);
 let credFilter='all';
-const dcard=c=>`<div class="dcard"><div class="pcw">${pcHTML(c)}</div><h3>${c.name}</h3><div class="by">${c.by}${c.when?' · '+c.when:''}</div><p>${c.what}</p>${c.url?`<a class="vf" href="${c.url}" target="_blank" rel="noopener">Verify on issuer's site ↗</a>`:''}</div>`;
+const dcard=c=>`<div class="dcard"><div class="flip" role="button" tabindex="0" aria-pressed="false" aria-label="Flip the ${c.name} card">
+  <div class="in">${pcHTML(c)}<div class="back ${c.t}"><div class="bi">
+   <div class="bk">${c.t==='cert'?'certification':'achievement'}${c.when?' · '+c.when:''}</div>
+   <h4>${c.name}</h4><div class="bby">${c.by}</div>
+   <p>${c.what}</p>
+   <div class="bcov"><span class="bl">${c.t==='cert'?'covers':'highlights'}</span><div>${(c.cov||[]).map(x=>`<span>${x}</span>`).join('')}</div></div>
+   ${c.url?`<a class="bv" href="${c.url}" target="_blank" rel="noopener">✓ Verify on issuer's site ↗</a>`:`<span class="bstamp">${c.t==='cert'?'certified':'★ achievement'}</span>`}
+  </div></div></div></div>
+  <h3>${c.name}</h3><div class="by">${c.by}${c.when?' · '+c.when:''}</div><span class="hint">tap the card to flip it</span></div>`;
 function renderDeck(){const certs=CREDS.filter(c=>c.t==='cert'),achs=CREDS.filter(c=>c.t==='ach');
   $('#deckPage').innerHTML=`<div class="crumbs"><a href="#home">← Home</a></div>
    <div class="phead"><div class="lab">credentials</div><h1>Certifications &amp; achievements<span style="color:var(--ac)">.</span></h1><p>${certs.length} certifications and ${achs.length} achievements, one card each. Certifications with a Verify link can be checked on the issuer's own site.</p></div>
@@ -1224,6 +1252,8 @@ function renderDeck(){const certs=CREDS.filter(c=>c.t==='cert'),achs=CREDS.filte
    ${credFilter!=='ach'?`<div class="credhead"><h2>Certifications</h2><span>${certs.length}</span></div><div class="dfield enter">${certs.map(dcard).join('')}</div>`:''}
    ${credFilter!=='cert'?`<div class="credhead"><h2>Achievements</h2><span>${achs.length}</span></div><div class="dfield ach enter">${achs.map(dcard).join('')}</div>`:''}`;
   $$('#deckPage canvas[data-spr]').forEach(drawPixel);
+  $$('#deckPage .flip').forEach(f=>{const t=()=>{f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))};
+    f.addEventListener('click',e=>{if(e.target.closest('a'))return;t()});f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
   $$('#cfilt button').forEach(b=>b.onclick=()=>{credFilter=b.dataset.f;renderDeck()});
   $$('#deckPage .enter').forEach(stagger)}
 
