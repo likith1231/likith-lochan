@@ -463,8 +463,8 @@ html.cc :is(input,textarea){cursor:text!important}
 .pc{display:block;background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45)}
 .pc .fr{width:100%;border:2px solid var(--ac);border-radius:7px;overflow:hidden;background:var(--soft)}
 .pc .num{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:center;color:var(--ac);border-bottom:2px solid var(--ac);padding:3px 0;background:#fff;font-weight:600}
-.pc.exp .fr{border-color:var(--orchid)}.pc.exp .num{color:var(--orchid);border-color:var(--orchid)}
-.pc.ach .fr{border-color:var(--wine)}.pc.ach .num{color:var(--wine);border-color:var(--wine)}
+.pc.k-exp .fr{border-color:var(--orchid)}.pc.k-exp .num{color:var(--orchid);border-color:var(--orchid)}
+.pc.k-ach .fr{border-color:var(--wine)}.pc.k-ach .num{color:var(--wine);border-color:var(--wine)}
 .pc canvas{display:block;width:100%;height:auto}
 .pc .nm{background:#1B1530;color:#fff;text-align:center;font-family:var(--display);font-weight:800;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;padding:7px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dfield{border-radius:var(--r);padding:clamp(20px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:40px 28px;background:radial-gradient(800px 500px at 100% 0%,color-mix(in srgb,var(--orchid) 45%,transparent),transparent 65%),linear-gradient(160deg,var(--plum),#4B1C8C)}
@@ -488,10 +488,10 @@ html.cc :is(input,textarea){cursor:text!important}
 .flip .back{position:absolute;inset:0;transform:rotateY(180deg);background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45);text-align:left}
 .back .bi{height:100%;border:2px solid var(--ac);border-radius:7px;padding:10px 9px;display:flex;flex-direction:column;gap:5px;color:#1B1530;overflow:hidden;
   background:radial-gradient(color-mix(in srgb,var(--ac) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,var(--soft))}
-.back.ach .bi{border-color:var(--wine);background:radial-gradient(color-mix(in srgb,var(--wine) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,#F8E9F0)}
+.back.k-ach .bi{border-color:var(--wine);background:radial-gradient(color-mix(in srgb,var(--wine) 16%,transparent) 1.2px,transparent 1.4px) 0 0/9px 9px,linear-gradient(180deg,#fff 55%,#F8E9F0)}
 .back .bk{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:600}
-.back.ach .bk,.back.ach .bl{color:var(--wine)}
-.back.exp .bi{border-color:var(--orchid)}.back.exp .bk,.back.exp .bl{color:var(--orchid)}.back.exp .bstamp{color:var(--orchid);border-color:var(--orchid)}
+.back.k-ach .bk,.back.k-ach .bl{color:var(--wine)}
+.back.k-exp .bi{border-color:var(--orchid)}.back.k-exp .bk,.back.k-exp .bl{color:var(--orchid)}.back.k-exp .bstamp{color:var(--orchid);border-color:var(--orchid)}
 .back h4{font-family:var(--display);font-size:13px;font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em}
 .back .bby{font-size:11.5px;color:#6A6380;margin-top:-3px}
 .back p{font-size:10.5px;line-height:1.38;margin:0;color:#3A3450;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -502,7 +502,7 @@ html.cc :is(input,textarea){cursor:text!important}
 .back .bv,.back .bstamp{margin-top:auto;align-self:flex-start;font-size:11px;font-weight:600;border-radius:7px;padding:5px 9px;text-decoration:none}
 .back .bv{background:linear-gradient(135deg,var(--ac),var(--plum));color:#fff}
 .back .bstamp{font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--wine);border:1.5px dashed var(--wine)}
-.back.cert .bstamp{color:var(--ac);border-color:var(--ac)}
+.back.k-cert .bstamp{color:var(--ac);border-color:var(--ac)}
 .dcard .hint{font-family:var(--mono);font-size:10.5px;opacity:.6}
 .dcard h3{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.01em;margin:8px 0 0;line-height:1.2}
 .dcard .by{font-size:13px;opacity:.8}
@@ -1244,13 +1244,13 @@ const CREDS=[
  {t:'ach',s:'star',short:'Coordinator Lead',cov:['Event planning','Team coordination'],name:'Coordinator Lead',by:'MEGHAHERTZ Fest',when:'',what:'Led coordination for the college fest.'},
  {t:'ach',s:'heart',short:'Rotaract',cov:['Community service','Volunteering'],name:'Rotaract Club of APSCE',by:'Member',when:'',what:'Community service with the college Rotaract Club.'}];
 const KIND={cert:'certification',exp:'experience',ach:'achievement'};
-const pcHTML=(c,k)=>`<div class="pc ${c.t}"${k!==undefined?` style="--k:${k}"`:''}><div class="fr"><div class="num">${KIND[c.t]}</div><canvas data-spr="${c.s}" data-t="${c.t}" width="160" height="170" aria-hidden="true"></canvas><div class="nm">${c.short}</div></div></div>`;
+const pcHTML=(c,k)=>`<div class="pc k-${c.t}"${k!==undefined?` style="--k:${k}"`:''}><div class="fr"><div class="num">${KIND[c.t]}</div><canvas data-spr="${c.s}" data-t="${c.t}" width="160" height="170" aria-hidden="true"></canvas><div class="nm">${c.short}</div></div></div>`;
 $('#nExp').textContent=CREDS.filter(c=>c.t==='exp').length;$('#nCert').textContent=CREDS.filter(c=>c.t==='cert').length;$('#nAch').textContent=CREDS.filter(c=>c.t==='ach').length;
 $('#fan').innerHTML=[0,1,2,4,5].map((i,k)=>pcHTML(CREDS[i],k-2)).join('');
 $$('#fan canvas[data-spr]').forEach(drawPixel);
 let credFilter='all';
 const dcard=c=>`<div class="dcard"><div class="flip" role="button" tabindex="0" aria-pressed="false" aria-label="Flip the ${c.name} card">
-  <div class="in">${pcHTML(c)}<div class="back ${c.t}"><div class="bi">
+  <div class="in">${pcHTML(c)}<div class="back k-${c.t}"><div class="bi">
    <div class="bk">${KIND[c.t]}${c.when?' · '+c.when:''}</div>
    <h4>${c.name}</h4>
    <p>${c.what}</p>
