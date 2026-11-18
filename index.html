@@ -435,7 +435,7 @@ html.cc :is(input,textarea){cursor:text!important}
 .cring.big{width:56px;height:56px;margin:-28px 0 0 -28px;background:color-mix(in srgb,var(--ac) 10%,transparent)}
 .cring.down{width:22px;height:22px;margin:-11px 0 0 -11px}
 
-/* the deck: pixel cards (colour-blocked) */
+/* certifications & achievements (colour-blocked) */
 .decktile{background:radial-gradient(600px 300px at 85% 110%,color-mix(in srgb,var(--orchid) 55%,transparent),transparent 70%),linear-gradient(120deg,var(--plum) 0%,var(--plum) 45%,var(--wine) 100%);color:#fff;border-color:transparent;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px;align-items:center;min-height:270px;text-decoration:none}
 @media (max-width:760px){.decktile{grid-template-columns:1fr}.fan{height:210px}}
 .decktile .lab{color:color-mix(in srgb,var(--ac-ink) 75%,transparent)}
@@ -448,34 +448,27 @@ html.cc :is(input,textarea){cursor:text!important}
 .decktile .go{display:inline-flex;gap:8px;align-items:center;background:#fff;color:var(--plum);font-weight:600;font-size:14px;padding:9px 14px;border-radius:10px}
 .decktile .go .ar{transition:transform .25s var(--ease)}
 .decktile:hover .go .ar{transform:translateX(4px)}
-.fan{position:relative;height:250px}
-.fan .pc{position:absolute;left:50%;bottom:-56px;width:136px;transform-origin:50% 130%;transform:translateX(-50%) rotate(calc(var(--k)*9deg)) translateX(calc(var(--k)*14px));transition:transform .6s var(--ease)}
-.decktile:hover .fan .pc{transform:translateX(-50%) rotate(calc(var(--k)*15deg)) translateX(calc(var(--k)*30px)) translateY(-18px)}
-.pc{background:#fff;border-radius:12px;padding:7px;box-shadow:0 14px 30px -14px rgba(20,10,50,.45)}
-.pc .fr{border:2px solid var(--ac);border-radius:7px;overflow:hidden;background:var(--soft)}
-.pc .num{font-family:var(--mono);font-size:12px;text-align:center;color:var(--ac);border-bottom:2px solid var(--ac);padding:2px 0;background:#fff;font-weight:500}
-.pc canvas{display:block;width:100%;height:auto}
-.pc .nm{background:#1B1530;color:#fff;text-align:center;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.03em;padding:6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.deckpage{display:grid;grid-template-columns:320px minmax(0,1fr);gap:12px;align-items:start;margin-top:4px}
-@media (max-width:900px){.deckpage{grid-template-columns:1fr}.dside{position:static!important}}
-.dside{position:sticky;top:calc(84px + env(safe-area-inset-top,0px));display:grid;gap:12px}
-.dside h1{font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.02em;margin:0;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.dside h1 span{color:var(--ac);font-size:24px}
-.dside p{margin:0;color:var(--muted);font-size:14px}
-.dfield{background:radial-gradient(800px 500px at 100% 0%,color-mix(in srgb,var(--orchid) 45%,transparent),transparent 65%),linear-gradient(160deg,var(--plum),var(--wine));border-radius:var(--r);padding:clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:40px 28px}
-.dcard{display:grid;gap:10px;text-align:center;color:#fff;align-content:start}
-.flip{perspective:1000px;padding:0;display:block;width:100%}
-.flip .in{position:relative;transition:transform .7s var(--ease);transform-style:preserve-3d}
-.flip:not(.on):hover .in{transform:translateY(-8px) rotate(-1.5deg)}
-.flip.on .in{transform:rotateY(180deg)}
-.flip .pc{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.flip .back{position:absolute;inset:0;transform:rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;color:#1B1530;border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;justify-content:center;gap:8px;text-align:left;font-size:13.5px;line-height:1.45}
-.flip .back b{font-family:var(--display);font-size:18px;font-weight:800;letter-spacing:-.01em}
-.flip .back small{font-family:var(--mono);font-size:11px;color:#6A6380}
-.dcard .unl{font-style:italic;font-size:12.5px;opacity:.85;margin:0}
-.dcard .gr{font-size:14px;margin:0;border-top:1px solid color-mix(in srgb,var(--ac-ink) 30%,transparent);padding-top:9px}
-.dcard.quest .pc .nm{background:#5E5876}
-.qtag{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;border-radius:4px;padding:1px 7px;justify-self:center;background:color-mix(in srgb,var(--ac-ink) 20%,transparent)}
+.credlist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.credlist li{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px;transition:transform .3s var(--ease),background .3s}
+.decktile:hover .credlist li{background:rgba(255,255,255,.14)}
+.decktile:hover .credlist li:nth-child(odd){transform:translateX(4px)}
+.credlist .sl{width:38px;height:38px;flex:none;border-radius:10px;background:#fff;color:var(--plum);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:600}
+.credlist b{display:block;font-size:14.5px;font-weight:600}
+.credlist small{font-size:12.5px;opacity:.75}
+.credlist .ok{margin-left:auto;font-family:var(--mono);font-size:11px;background:rgba(255,255,255,.16);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.credhead{display:flex;align-items:baseline;gap:12px;margin:26px 4px 12px}
+.credhead h2{font-family:var(--display);font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.025em;margin:0}
+.credhead span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.credcard{display:flex;flex-direction:column;gap:10px}
+.credcard .top{display:flex;gap:12px;align-items:center}
+.credcard .sl{width:46px;height:46px;flex:none;border-radius:12px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--ac),var(--plum))}
+.credcard.ach .sl{background:linear-gradient(135deg,var(--wine),var(--orchid))}
+.credcard .kind{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.credcard h3{font-family:var(--display);font-size:20px;font-weight:800;letter-spacing:-.015em;margin:0;line-height:1.15}
+.credcard p{margin:0;color:var(--muted);font-size:14px}
+.credcard .by{font-size:13.5px;color:var(--ink);font-weight:500}
+.credcard .vf{margin-top:auto;font-size:13px;font-weight:500;color:var(--ac);text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.credcard .vf:hover{text-decoration:underline}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -497,7 +490,7 @@ html.cc :is(input,textarea){cursor:text!important}
   <nav aria-label="Main">
     <a class="logo" href="#home"><i></i>likith lochan</a>
     <div class="routes">
-      <a href="#home" data-nav="home">Home</a><a href="#work" data-nav="work">Work</a><a href="#deck" data-nav="deck">Deck</a><button id="navAbout">About</button><button id="navResume">Resume</button><button id="navContact">Contact</button>
+      <a href="#home" data-nav="home">Home</a><a href="#work" data-nav="work">Work</a><a href="#credentials" data-nav="deck">Certifications</a><button id="navAbout">About</button><button id="navResume">Resume</button><button id="navContact">Contact</button>
     </div>
     <div class="navr">
       <button class="kbd" id="tourBtn">▶ 30-sec tour</button>
@@ -614,15 +607,15 @@ html.cc :is(input,textarea){cursor:text!important}
         </ul>
       </section>
 
-      <a class="t c12 decktile" href="#deck" id="s-deck">
+      <a class="t c12 decktile" href="#credentials" id="s-deck">
         <div>
-          <div class="lab">the deck</div>
-          <h3>Every milestone unlocks a card.</h3>
-          <p>Certifications, wins and internships are unlocked cards. Things I'm still chasing are side quests.</p>
-          <div class="cnt"><div><b id="dUn">10</b><span>unlocked</span></div><div><b id="dQu">5</b><span>side quests</span></div></div>
-          <span class="go">Open the deck <span class="ar">→</span></span>
+          <div class="lab">certifications &amp; achievements</div>
+          <h3>Certifications &amp; achievements</h3>
+          <p>Verified certifications from AWS and Oracle, plus my internship, hackathon and leadership roles.</p>
+          <div class="cnt"><div><b id="nCert">5</b><span>certifications</span></div><div><b id="nAch">6</b><span>achievements</span></div></div>
+          <span class="go">See all <span class="ar">→</span></span>
         </div>
-        <div class="fan" id="fan" aria-hidden="true"></div>
+        <ul class="credlist" id="credMini"></ul>
       </a>
 
       <section class="t c12 contact" id="s-contact">
@@ -650,7 +643,7 @@ html.cc :is(input,textarea){cursor:text!important}
   <div id="comparePage" class="view" hidden></div>
   <!-- ================= CASE ================= -->
   <div id="casePage" class="view" hidden></div>
-  <!-- ================= DECK ================= -->
+  <!-- ================= CERTIFICATIONS & ACHIEVEMENTS ================= -->
   <div id="deckPage" class="view" hidden></div>
 
   <footer><span>© 2026 Likith Lochan</span><span>press <b>?</b> for shortcuts · <b>⌘K</b> to jump anywhere</span><button id="replay">replay intro</button></footer>
@@ -905,7 +898,7 @@ const P=[
  result:"Three working models, documented in the CodSoft repository.",
  lesson:["Accuracy can lie","On rare events, the metric you choose decides whether the model is useful."],imgs:[]}
 ];
-// ML internship lives in the Deck as an achievement, not as a project
+// The ML internship is listed under achievements, not as a project
 P.splice(P.findIndex(p=>p.id==='mlintern'),1);P.find(p=>p.id==='pm').span='c6';P.find(p=>p.id==='authencheck').span='c6';
 const LENS={all:["DevOps · Full-stack · AI/ML","I design, build and run <mark>production software</mark>, from the API to the cluster it runs on."],
  devops:["DevOps & Cloud","I run <mark>Kubernetes platforms</mark> with GitOps, autoscaling and observability, and load-test them before users do."],
@@ -1101,7 +1094,7 @@ function route(hh){const h=decodeURIComponent(hh!==undefined?hh:location.hash.sl
   const prev=cur;tourGo(-1);
   if(p){cur='case';show('casePage');renderCase(p);scrollTo(0,0)}
   else if(h==='work'){cur='work';show('workPage');renderWork();if(prev!=='work')scrollTo(0,0)}
-  else if(h==='deck'){cur='deck';show('deckPage');renderDeck();scrollTo(0,0)}
+  else if(h==='deck'||h==='credentials'){cur='deck';show('deckPage');renderDeck();scrollTo(0,0)}
   else if(h==='compare'){cur='compare';show('comparePage');renderCompare();scrollTo(0,0)}
   else{cur='home';show('home');
     if(LENS[h]&&h!=='all'){lens=h;apply(true);const t=$('#tailored');t.hidden=false;t.innerHTML=`<span>✦ Shared view: this portfolio is filtered for <b>${LENS[h][0]}</b> roles.</span><button id="showall">show everything</button>`;$('#showall').onclick=()=>{t.hidden=true;setLens('all')}}
@@ -1131,7 +1124,7 @@ $('#msg').onsubmit=e=>{e.preventDefault();const n=$('#mname').value.trim(),em=$(
 /* ================= TOUR ================= */
 const TOUR=[["#s-hero","Pick a role. The pitch, projects and skills change to match, and \"share this view\" copies a link that opens already filtered."],["#s-yaml","The facts recruiters look for, in one card."],
  ["#s-stats","The portfolio at a glance."],['[data-id="ghostops"]',"Every project opens a full case study: architecture, decisions, what broke and the result."],
- ["#s-status","Seven systems, pinged live from your browser."],["#s-stack","Click a skill to see exactly which projects use it."],["#s-resume","Resume, one click away."],["#s-deck","The Deck: every milestone unlocks a card. Hobbies are side quests in progress."],["#s-contact","Send a message or copy the email."]];
+ ["#s-status","Seven systems, pinged live from your browser."],["#s-stack","Click a skill to see exactly which projects use it."],["#s-resume","Resume, one click away."],["#s-deck","Certifications you can verify on the issuer's site, plus internship, hackathon and leadership roles."],["#s-contact","Send a message or copy the email."]];
 function tourGo(i){$$('.spot').forEach(s=>s.classList.remove('spot'));if(i<0||i>=TOUR.length){document.body.classList.remove('touring');$('#tour').hidden=true;return}
   if(cur!=='home'){go('home');setTimeout(()=>tourGo(i),120);return}
   document.body.classList.add('touring');const el=$(TOUR[i][0]);el.classList.add('spot');el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
@@ -1140,7 +1133,7 @@ function tourGo(i){$$('.spot').forEach(s=>s.classList.remove('spot'));if(i<0||i>
 $('#tourBtn').onclick=()=>tourGo(0);
 
 /* ================= PALETTE ================= */
-const items=[...P.map(p=>[p.name,"case study",()=>go(p.id)]),["All work","page",()=>go('work')],["Compare projects","page",()=>go('work')],["The Deck","page",()=>go('deck')],["Home","page",()=>go('home')],
+const items=[...P.map(p=>[p.name,"case study",()=>go(p.id)]),["All work","page",()=>go('work')],["Compare projects","page",()=>go('work')],["Certifications & achievements","page",()=>go('credentials')],["Home","page",()=>go('home')],
  ["Likith's Resume","resume",openResume],["Copy email","action",copyEmail],["Start 30-second tour","action",()=>tourGo(0)],
  ...Object.keys(LENS).map(k=>["View as "+(k==='all'?'everything':LENS[k][0]),"role",()=>{if(cur!=='home')go('home');setLens(k)}]),
  ["Copy link to this view","share",()=>$('#shareLens').click()],["Toggle dark mode","action",toggleTheme],["Keyboard shortcuts","help",openKeys],["Replay intro","action",()=>playIntro(true)]];
@@ -1166,64 +1159,32 @@ addEventListener('keydown',e=>{
   else if(cur==='case'&&e.key==='ArrowRight')$('#cnext').click();else if(cur==='case'&&e.key==='ArrowLeft')$('#cprev').click();
 });
 
-/* ================= PIXEL ART ================= */
 const cssv=k=>getComputedStyle(document.documentElement).getPropertyValue(k).trim();
-const SPR={
-cloud:["","","","......xxxx......","....xxaaaaxx....","...xaaaaaaaax...","..xaaaaaaaaaax..",".xxaaaaaaaaaaxx.","xaaaaaaaaaaaaaax","xaaaassssssaaaax","xaaaaaaaaaaaaaax",".xxxxxxxxxxxxxx.","","......x..x......","......x..x......","....xxxxxxxx...."],
-chip:["","...x.x.x.x.x....","..xxxxxxxxxxxx..","x.xssssssssssx.x","..xsaaaaaaaasx..","x.xsaxxxxxxasx.x","..xsaxssssxasx..","x.xsaxsaasxasx.x","..xsaxssssxasx..","x.xsaxxxxxxasx.x","..xsaaaaaaaasx..","x.xssssssssssx.x","..xxxxxxxxxxxx..","...x.x.x.x.x....",""],
-robot:["",".......xx.......","........a.......","...xxxxxxxxxx...","...xssssssssx...","...xsxxssxxsx...","...xsxxssxxsx...","...xssssssssx...","...xssaaaassx...","...xssssssssx...","...xxxxxxxxxx...",".....xaaaax.....","..xxxxxxxxxxxx..","..xaaaaaaaaaax..","..xaxxaaaaxxax..","..xxxxxxxxxxxx.."],
-server:["","..xxxxxxxxxxxx..","..xssssssssaax..","..xxxxxxxxxxxx..","..xssssssssaax..","..xxxxxxxxxxxx..","..xssssssssaax..","..xxxxxxxxxxxx..","..xssssssssaax..","..xxxxxxxxxxxx..","......x..x......","......x..x......","..xxxxxxxxxxxx..","..xaaaaaaaaaax..","..xxxxxxxxxxxx..",""],
-rocket:[".......xx.......","......xaax......",".....xaaaax.....",".....xassax.....",".....xassax.....",".....xaaaax.....",".....xaaaax.....",".....xaxxax.....","....xxaaaaxx....","...xaxaaaaxax...","..xaaxaaaaxaax..","..xxxxxxxxxxxx..","......xaax......",".......aa.......","......a..a......",".......aa......."],
-flag:["","..x.............","..xxxxxxxxxxx...","..xaaaaaaaaax...","..xaaaassaaax...","..xaaassssaax...","..xaaaassaaax...","..xaaaaaaaaax...","..xxxxxxxxxxx...","..x.............","..x.............","..x.............","..x.............",".xxx............","xxxxx...........",""],
-chart:["","............xx..","............xx..","........aa..xx..","........aa..xx..","....ss..aa..xx..","....ss..aa..xx..","....ss..aa..xx..","ss..ss..aa..xx..","ss..ss..aa..xx..","ss..ss..aa..xx..","ss..ss..aa..xx..","xxxxxxxxxxxxxxxx","","",""],
-medal:["","...xx......xx...","....xa....ax....",".....xa..ax.....","......xaax......",".......xx.......","......xxxx......",".....xaaaax.....","....xaassaax....","....xasaasax....","....xaassaax....",".....xaaaax.....","......xxxx......","","",""],
-star:["",".......xx.......",".......aa.......","......xaax......","......xaax......","xxxxxxaaaaxxxxxx",".xaaaaaaaaaaaax.","..xaaaassaaaax..","...xaaaaaaaax...","...xaaaaaaaax...","..xaaaaxxaaaax..","..xaaax..xaaax..",".xaax......xaax.",".xxx........xxx.","",""],
-torii:["","","xxxxxxxxxxxxxxxx",".xaaaaaaaaaaaax.","..xxxxxxxxxxxx..","...xa......ax...",".xxxaxxxxxxaxxx.","...xa......ax...","...xa......ax...","...xa......ax...","...xa......ax...","...xa......ax...","...xa......ax...","..xxax....xaxx..","",""],
-belt:["","","......xxxx......",".....xaaaax.....","xxxxxaaaaaaxxxxx","aaaaaxaaaaxaaaaa","xxxxxxaaaaxxxxxx",".....xaxxax.....","....xaax.xax....","...xaax...xax...","..xaax.....xax..","..xxx.......xx..","","","",""],
-bike:["","",".........xxx....","........x..x....","....xxxxxaax....","...xaaaaaaax....","..xaaaxxxxaax...",".xxxx.....xxxx..","x.ssx....x.ssx..","xs..sx..xs..sx..","xs..sx..xs..sx..","x.ss.x..x.ss.x..",".xxxx....xxxx...","","",""],
-horse:["","......xx........",".....xaax.......","....xaaaaxx.....","...xaaxaaaax....","..xaaaaaaaaax...",".xaaaaaaxaaaax..",".xaax..xaaaaax..","..xx...xaaaaax..",".......xaaaaax..","......xaaaaaax..",".....xaaaaaaax..",".....xxxxxxxxx..","","",""],
-sword:["..............xx",".............xax","............xax.","...........xax..","..........xax...",".........xax....","........xax.....",".......xax......","..x...xax.......","..xx.xax........","...xxax.........","...xxx..........","..xx.xx.........",".xx...x.........","xx..............",""],
-shuttle:["","...x...x...x....","...xs..xs..xs...","....xs.xs.xs....","....xs.xs.xs....",".....xsxsxs.....",".....xsxsxs.....","......xxxxx.....","......xaaax.....",".......aaa......","","","","","",""]};
-function drawPixel(cv){const sp=SPR[cv.dataset.spr];if(!sp)return;const ctx=cv.getContext('2d');const C=10,COLS=16,ROWS=17;cv.width=COLS*C;cv.height=ROWS*C;
-  const AC=cssv('--ac')||'#6B3FF2',MK=cssv('--mk')||'#DDD2FF',SOFT=cssv('--soft')||'#EEE8FF',INK='#1B1530';const quest=cv.dataset.q==='1';
-  ctx.fillStyle=SOFT;ctx.fillRect(0,0,cv.width,cv.height);
-  const seedv=cv.dataset.spr.length;
-  for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){const w=Math.sin(x*.7+seedv)+Math.cos(y*.55-seedv*.3);ctx.fillStyle=w>.4?MK:'#fff';ctx.beginPath();ctx.arc(x*C+C/2,y*C+C/2,w>.4?3:1.6,0,6.283);ctx.fill()}
-  const rows=sp.map(r=>(r+'................').slice(0,16));const top=Math.floor((ROWS-rows.length)/2);
-  rows.forEach((r,y)=>[...r].forEach((ch,x)=>{if(ch==='.')return;ctx.fillStyle=ch==='x'?(quest?'#5E5876':INK):ch==='a'?AC:MK;
-    ctx.beginPath();ctx.arc(x*C+C/2,(y+top)*C+C/2,ch==='s'?4:4.4,0,6.283);ctx.fill()}))}
-function pcHTML(c,i){return `<div class="pc"><div class="fr"><div class="num">${ROMAN[i]}</div><canvas data-spr="${c.s}" data-q="${c.q?1:0}" width="160" height="170" aria-hidden="true"></canvas><div class="nm">${c.name}.</div></div></div>`}
-const ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV'];
-const CARDS=[
- {name:"THE FIXER",s:"robot",unl:"Unlocked when GhostOps opened its first pull request on its own",gr:"Grants the ability to ship AI that proves its work.",when:"2026",kind:"Project milestone"},
- {name:"THE CLOUD WALKER",s:"cloud",unl:"Unlocked by passing AWS Certified Cloud Practitioner",gr:"Grants fluency in core AWS services, security and pricing.",when:"Oct 2026",kind:"Certification"},
- {name:"THE AI PRACTITIONER",s:"chip",unl:"Unlocked by passing AWS Certified AI Practitioner",gr:"Grants the judgement to pick the right AI service for the job.",when:"Sep 2026",kind:"Certification"},
- {name:"THE ORCHESTRATOR",s:"star",unl:"Unlocked by Oracle AI Foundations certification",gr:"Grants the design of agents that plan and call real tools.",when:"Jul 2026",kind:"Certification"},
- {name:"THE ANALYST",s:"chart",unl:"Unlocked by a Machine Learning internship at CodSoft",gr:"Grants models judged on precision and recall, not accuracy alone.",when:"2026",kind:"Internship"},
- {name:"THE LOAD BEARER",s:"server",unl:"Unlocked by 13,067 requests with 0 errors under a booking rush",gr:"Grants calm when everyone clicks at once.",when:"2026",kind:"Project milestone"},
- {name:"THE EXPLORER",s:"rocket",unl:"Unlocked at the NASA Space Apps Challenge hackathon, Dayananda Sagar",gr:"Grants building fast under a hard deadline.",when:"Hackathon",kind:"Hackathon"},
- {name:"THE LEADER",s:"flag",unl:"Unlocked by RYLA 2024 and leading coordination for MEGHAHERTZ fest",gr:"Grants getting a room of people moving in one direction.",when:"2024",kind:"Leadership"},
- {name:"THE CONTRIBUTOR",s:"medal",unl:"Unlocked by a Certificate of Appreciation at Namma JobAthon '24",gr:"Grants showing up for the community.",when:"2024",kind:"Recognition"},
- {name:"THE RALLY",s:"shuttle",unl:"Unlocked on weekend badminton courts",gr:"Grants quick reflexes and a competitive streak.",when:"Ongoing",kind:"Hobby"},
- {name:"THE WANDERER",s:"torii",q:1,unl:"Side quest: travel across Japan",gr:"Will grant a new language, and a lot of trains.",when:"In progress",kind:"Side quest"},
- {name:"THE DISCIPLINED",s:"belt",q:1,unl:"Side quest: train in martial arts",gr:"Will grant focus that carries into everything else.",when:"In progress",kind:"Side quest"},
- {name:"THE TRAILBLAZER",s:"bike",q:1,unl:"Side quest: ride and drive off-road, on two wheels and four",gr:"Will grant comfort on any terrain.",when:"In progress",kind:"Side quest"},
- {name:"THE RIDER",s:"horse",q:1,unl:"Side quest: learn horse riding",gr:"Will grant patience and balance.",when:"In progress",kind:"Side quest"},
- {name:"THE HISTORIAN",s:"sword",q:1,unl:"Side quest: study the craft behind historical weapons",gr:"Will grant respect for old engineering.",when:"In progress",kind:"Side quest"}];
-$('#dUn').textContent=CARDS.filter(c=>!c.q).length;$('#dQu').textContent=CARDS.filter(c=>c.q).length;
-$('#fan').innerHTML=[0,5,1,10,13].map((ci,k)=>pcHTML(CARDS[ci],ci).replace('<div class="pc"',`<div class="pc" style="--k:${k-2}"`)).join('');
-let deckFilter='all';
-function renderDeck(){const un=CARDS.filter(c=>!c.q).length;
-  $('#deckPage').innerHTML=`<div class="crumbs"><a href="#home">← Home</a></div><div class="deckpage"><aside class="dside enter">
-    <div class="t"><h1>The Deck <span>${un}/${CARDS.length}</span></h1></div>
-    <div class="t"><div class="lab">about the deck</div><p>Every milestone unlocks a card: a certification, a hackathon, a project that hit its goal. Side quests are the things I'm still chasing outside of work.</p></div>
-    <div class="t"><div class="lab">show</div><div class="seg" id="dfilt"><button data-f="all" aria-pressed="${deckFilter==='all'}">All</button><button data-f="un" aria-pressed="${deckFilter==='un'}">Unlocked</button><button data-f="q" aria-pressed="${deckFilter==='q'}">Side quests</button></div><p class="note" style="margin-top:10px">tap a card to flip it</p></div>
-   </aside><div class="dfield enter">${CARDS.map((c,i)=>({c,i})).filter(({c})=>deckFilter==='all'||(deckFilter==='un'?!c.q:c.q)).map(({c,i})=>`<div class="dcard ${c.q?'quest':''}">
-     <button class="flip" aria-label="Flip ${c.name}"><div class="in">${pcHTML(c,i)}<div class="back"><small>${c.kind} · ${c.when}</small><b>${c.name.charAt(0)+c.name.slice(1).toLowerCase()}.</b><span>${c.unl}.</span><span>${c.gr}</span></div></div></button>
-     ${c.q?'<span class="qtag">side quest · in progress</span>':''}<p class="unl">${c.unl}</p><p class="gr">${c.gr}</p></div>`).join('')}</div></div>`;
-  $$('#deckPage canvas[data-spr]').forEach(drawPixel);
-  $$('#dfilt button').forEach(b=>b.onclick=()=>{deckFilter=b.dataset.f;renderDeck()});
-  $$('#deckPage .flip').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
+/* ================= CERTIFICATIONS & ACHIEVEMENTS ================= */
+const CREDS=[
+ {t:'cert',name:'AWS Certified AI Practitioner',by:'Amazon Web Services',when:'Sep 2026',sl:'AWS',what:'Proctored AWS exam on AI, machine learning and generative AI services.',url:'https://www.credly.com/badges/15423736-cd54-47de-8db1-9734be88cee1'},
+ {t:'cert',name:'AWS Certified Cloud Practitioner',by:'Amazon Web Services',when:'Oct 2026',sl:'AWS',what:'Proctored AWS exam on cloud concepts, security, pricing and core services.',url:'https://www.credly.com/badges/6e478082-fc9c-4f8a-83bf-5ed3f07633ae'},
+ {t:'cert',name:'Oracle AI Foundations',by:'Oracle',when:'Jul 2026',sl:'ORA',what:'Oracle certification on AI and agentic AI foundations.',url:'https://catalog-education.oracle.com/pls/certview/sharebadge?id=1E2117DD9FC2FB3A7EE64696BA6313651EC01E7594244C181FFF695C4210163F'},
+ {t:'cert',name:'Computer Networks',by:'Simplilearn',when:'Oct 2025',sl:'SL',what:'Networking fundamentals behind cloud and DevOps work.',url:'https://tinyurl.com/bdex8see'},
+ {t:'cert',name:'UML: Unified Modeling Language',by:'Infosys Springboard',when:'',sl:'INF',what:'Software design and modelling with UML.',url:''},
+ {t:'ach',name:'Machine Learning Intern',by:'CodSoft (virtual)',when:'2026',sl:'ML',what:'Built three predictive models in Python: credit-card fraud, SMS spam and customer churn.'},
+ {t:'ach',name:'NASA Space Challenge Hackathon',by:'Dayananda Sagar',when:'',sl:'HACK',what:'Took part in the NASA Space Challenge hackathon.'},
+ {t:'ach',name:'RYLA 2024',by:'Rotary Youth Leadership Awards',when:'2024',sl:'RYLA',what:'Selected for Rotary\'s youth leadership programme.'},
+ {t:'ach',name:'Certificate of Appreciation',by:"Namma JobAthon '24",when:'2024',sl:'NJA',what:'Recognised for contributing to the Namma JobAthon hiring event.'},
+ {t:'ach',name:'Coordinator Lead',by:'MEGHAHERTZ Fest',when:'',sl:'LEAD',what:'Led coordination for the college fest.'},
+ {t:'ach',name:'Rotaract Club of APSCE',by:'Member',when:'',sl:'RC',what:'Community service with the college Rotaract Club.'}];
+$('#nCert').textContent=CREDS.filter(c=>c.t==='cert').length;$('#nAch').textContent=CREDS.filter(c=>c.t==='ach').length;
+$('#credMini').innerHTML=CREDS.filter(c=>c.t==='cert').slice(0,3).concat(CREDS.filter(c=>c.t==='ach').slice(0,1)).map(c=>`<li><span class="sl">${c.sl}</span><span><b>${c.name}</b><small>${c.by}${c.when?' · '+c.when:''}</small></span><span class="ok">${c.t==='cert'?'verified':'achievement'}</span></li>`).join('');
+let credFilter='all';
+function credCard(c){return `<div class="t c4 credcard ${c.t}"><div class="top"><span class="sl">${c.sl}</span><div><div class="kind">${c.t==='cert'?'certification':'achievement'}${c.when?' · '+c.when:''}</div><h3>${c.name}</h3></div></div>
+  <div class="by">${c.by}</div><p>${c.what}</p>${c.url?`<a class="vf" href="${c.url}" target="_blank" rel="noopener">Verify on issuer's site ↗</a>`:''}</div>`}
+function renderDeck(){const certs=CREDS.filter(c=>c.t==='cert'),achs=CREDS.filter(c=>c.t==='ach');
+  $('#deckPage').innerHTML=`<div class="crumbs"><a href="#home">← Home</a></div>
+   <div class="phead"><div class="lab">credentials</div><h1>Certifications &amp; achievements<span style="color:var(--ac)">.</span></h1><p>${certs.length} certifications and ${achs.length} achievements. Every certification with a Verify link can be checked on the issuer's own site.</p></div>
+   <div class="toolbar"><div class="seg" id="cfilt"><button data-f="all" aria-pressed="${credFilter==='all'}">All</button><button data-f="cert" aria-pressed="${credFilter==='cert'}">Certifications</button><button data-f="ach" aria-pressed="${credFilter==='ach'}">Achievements</button></div></div>
+   ${credFilter!=='ach'?`<div class="credhead"><h2>Certifications</h2><span>${certs.length}</span></div><div class="grid enter">${certs.map(credCard).join('')}</div>`:''}
+   ${credFilter!=='cert'?`<div class="credhead"><h2>Achievements</h2><span>${achs.length}</span></div><div class="grid enter">${achs.map(credCard).join('')}</div>`:''}`;
+  $$('#cfilt button').forEach(b=>b.onclick=()=>{credFilter=b.dataset.f;renderDeck()});
   $$('#deckPage .enter').forEach(stagger)}
 
 /* ================= BUDDY ================= */
@@ -1260,7 +1221,7 @@ const buddy=(()=>{const wrap=$('#buddyWrap'),btn=$('#buddyBtn'),cv=$('#buddy');i
       x=x0+(tx-x0)*e;y=y0+(ty-y0)*e-Math.sin(Math.PI*p)*arc;place();draw(BF.jump,dir<0,0,false);
       if(p<1)requestAnimationFrame(step);else{tile=t;state='land';draw(BF.stand,dir<0,1);setTimeout(()=>{if(state==='land')state='idle'},160)}})(t0)}
   function jump(){if(tile)hopTo(tile,x-scrollX+W/2)}
-  const tips=["Click any tile and I'll jump to it.","Hi! Press ⌘K to jump anywhere.","Pick a role above. The page reshapes for it.","Every project has an architecture diagram.","Open The Deck to see what I've unlocked."];let ti=0;
+  const tips=["Click any tile and I'll jump to it.","Hi! Press ⌘K to jump anywhere.","Pick a role above. The page reshapes for it.","Every project has an architecture diagram.","My certifications have Verify links."];let ti=0;
   btn.addEventListener('click',e=>{e.stopPropagation();jump();const b=$('#bubble');b.textContent=tips[ti++%tips.length];b.hidden=false;b.style.animation='none';void b.offsetWidth;b.style.animation='';clearTimeout(b._t);b._t=setTimeout(()=>b.hidden=true,2800)});
   document.addEventListener('click',e=>{if(cur!=='home'||e.target.closest('#buddyWrap'))return;const t=e.target.closest('#homeGrid .t');if(!t||t.matches('a'))return;hopTo(t,e.clientX)});
   addEventListener('pointermove',e=>{if(state!=='idle'&&state!=='wave'&&state!=='walk')return;const r=btn.getBoundingClientRect();if(Math.hypot(e.clientX-(r.left+17),e.clientY-(r.top+21))<80){lastNear=performance.now();if(state!=='wave'){state='wave';dir=e.clientX<r.left+17?-1:1}}});
@@ -1279,7 +1240,7 @@ const buddy=(()=>{const wrap=$('#buddyWrap'),btn=$('#buddyBtn'),cv=$('#buddy');i
 function setCursor(){if(!fine||reduce)return;const ac=cssv('--ac')||'#6B3FF2',pl=cssv('--plum')||'#3A1366',ink='#1B1530';
   const mk=(fill,grad)=>`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>${grad?`<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${ac}'/><stop offset='1' stop-color='${pl}'/></linearGradient></defs>`:''}<path d='M3 2.5L19 10.2L11.4 12.1L8.2 19.5Z' fill='${grad?'url(#g)':fill}' stroke='white' stroke-width='1.6' stroke-linejoin='round'/></svg>`)}") 3 2, auto`;
   const r=document.documentElement;r.style.setProperty('--cur',mk(ink,false));r.style.setProperty('--curp',mk(ac,true));r.classList.add('cc')}
-function onAccent(){$$('canvas[data-spr]').forEach(drawPixel);setCursor()}
+function onAccent(){setCursor()}
 
 /* ================= INTRO ================= */
 let introRun=null;
