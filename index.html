@@ -643,8 +643,8 @@ html.cc :is(input,textarea){cursor:text!important}
         <div>
           <div class="lab">resume</div>
           <h3>Likith's Resume</h3>
-          <p>Software Developer · one page · updated Nov 2026</p>
-          <div class="ctas"><button class="btn ac" id="tileResume">View</button><a class="btn" href="Likith_Lochan_Resume.pdf" target="_blank" rel="noopener">Open PDF ↗</a></div>
+          <p>Two one-page versions · updated Nov 2026</p>
+          <div class="ctas"><button class="btn ac" id="tileResume">Software Developer</button><button class="btn" id="tileResumeDevops">DevOps</button></div>
         </div>
       </section>
 
@@ -1201,8 +1201,15 @@ const copyEmail=()=>copyText('likithlu3@gmail.com','Email copied');
 document.addEventListener('click',e=>{if(e.target.closest('[data-copy]'))copyEmail()});
 function openModal(html,label){$('#mbox').innerHTML=`<button class="x" id="mx">esc ✕</button>`+html;$('#mbox').setAttribute('aria-label',label);$('#modalWrap').hidden=false;$('#mx').onclick=closeAll;$('#mx').focus()}
 $('#mscrim').onclick=closeAll;$('#modal').onclick=e=>{if(e.target.id==='modal')closeAll()};
-function openResume(){openModal(`<div class="lab">resume</div><h2>Likith's Resume</h2><div class="ctas" style="margin-top:10px"><a class="btn ac" href="Likith_Lochan_Resume.pdf" target="_blank" rel="noopener">Open PDF ↗</a><button class="btn" data-copy>Copy email</button></div><img src="resume-page.png" alt="Likith Lochan's one-page software developer resume">`,"Likith's Resume")}
-['#navResume','#heroResume','#tileResume','#thumbResume','#ctResume'].forEach(s=>$(s).onclick=openResume);
+const RESUMES={sde:{t:'Software Developer',pdf:'Likith_Lochan_Resume.pdf',img:'resume-page.png'},devops:{t:'DevOps',pdf:'Likith_Lochan_DevOps_Resume.pdf',img:'resume-devops.png'}};
+function openResume(k){if(typeof k!=='string')k=lens==='devops'?'devops':'sde';const r=RESUMES[k];
+  openModal(`<div class="lab">resume</div><h2>Likith's Resume</h2>
+   <div class="ctas" style="margin-top:10px;align-items:center"><div class="seg" id="rsw">${Object.entries(RESUMES).map(([kk,v])=>`<button data-r="${kk}" aria-pressed="${kk===k}">${v.t}</button>`).join('')}</div>
+   <a class="btn ac" href="${r.pdf}" target="_blank" rel="noopener">Open PDF ↗</a><button class="btn" data-copy>Copy email</button></div>
+   <img src="${r.img}" alt="Likith Lochan's one-page ${r.t} resume">`,"Likith's Resume");
+  $$('#rsw button').forEach(b=>b.onclick=()=>openResume(b.dataset.r))}
+$('#tileResumeDevops').onclick=()=>openResume('devops');
+['#navResume','#heroResume','#thumbResume','#ctResume'].forEach(s=>$(s).onclick=()=>openResume());$('#tileResume').onclick=()=>openResume('sde');
 function openKeys(){openModal(`<div class="lab">shortcuts</div><h2>Keyboard</h2><div class="keys"><kbd>⌘K</kbd><span>jump to anything</span><kbd>1 – 4</kbd><span>switch role view</span><kbd>W</kbd><span>all work</span><kbd>R</kbd><span>open resume</span><kbd>C</kbd><span>copy email</span><kbd>T</kbd><span>start the 30-second tour</span><kbd>D</kbd><span>dark / light</span><kbd>← →</kbd><span>previous / next case study</span><kbd>Esc</kbd><span>close</span></div>`,"Keyboard shortcuts")}
 $('#keysBtn').onclick=openKeys;
 function closeAll(){$('#modalWrap').hidden=true;$('#pal').hidden=true}
@@ -1225,7 +1232,7 @@ $('#tourBtn').onclick=()=>tourGo(0);
 
 /* ================= PALETTE ================= */
 const items=[...P.map(p=>[p.name,"case study",()=>go(p.id)]),["All work","page",()=>go('work')],["Compare projects","page",()=>go('work')],["Credentials: experience, certifications & achievements","page",()=>go('credentials')],["Home","page",()=>go('home')],
- ["Likith's Resume","resume",openResume],["Copy email","action",copyEmail],["Start 30-second tour","action",()=>tourGo(0)],
+ ["Resume: Software Developer","resume",()=>openResume('sde')],["Resume: DevOps","resume",()=>openResume('devops')],["Copy email","action",copyEmail],["Start 30-second tour","action",()=>tourGo(0)],
  ...Object.keys(LENS).map(k=>["View as "+(k==='all'?'everything':LENS[k][0]),"role",()=>{if(cur!=='home')go('home');setLens(k)}]),
  ["Copy link to this view","share",()=>$('#shareLens').click()],["Toggle dark mode","action",toggleTheme],["Keyboard shortcuts","help",openKeys],["Replay intro","action",()=>playIntro(true)]];
 const pal=$('#pal'),pin=$('#pin'),pl=$('#plist');let sel=0,shown=items;
